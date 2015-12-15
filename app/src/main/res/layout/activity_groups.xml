@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="fluidpirates.fluidpirates_android.Groups">
+
+    <include layout = "@layout/fragment_groups"/>
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/listGroups"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/backcleargreen"
+        android:listSelector="@drawable/backnormalgreen"
+        android:nestedScrollingEnabled="false"
+        android:dividerHeight="10dp"
+        android:divider="#ffffff">
+    </ListView>
+    <Button
+        android:id="@+id/create_group"
+        style="?android:textAppearanceSmall"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textAllCaps="false"
+        android:background="@drawable/standard_button"
+        android:text="Créer un groupe"
+        android:textSize="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginBottom="30dp" />
+
+</RelativeLayout>

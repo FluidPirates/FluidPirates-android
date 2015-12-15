@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">FluidPirates-android</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_propositions">Propositions</string>
+    <string name="title_activity_navigation">Navigation</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_fluid_pirates">fluidPirates</string>
+    <string name="title_activity_menu">Menu</string>
+    <string name="connexion">Se connecter</string>
+
+    <string-array name="name_group">
+    <item>UTT\n2500</item>
+    <item>UTC\n3000</item>
+    <item>UTBM\n1000</item>
+</string-array>
+
+    <integer-array name="nb_members">
+        <item>2500</item>
+        <item>3000</item>
+        <item>1000</item>
+    </integer-array>
+
+    <string-array name="followers_tweet_list">
+        <item>It\'s the follower\'s fourth tweet</item>
+        <item>It\'s the follower\'s third tweet</item>
+        <item>It\'s the follower\'s second tweet</item>
+        <item>It\'s the follower\'s first tweet</item>
+    </string-array>
+    <string-array name="followees_tweet_list">
+        <item>It\'s the followee\'s fourth tweet</item>
+        <item>It\'s the followee\'s third tweet</item>
+        <item>It\'s the followee\'s second tweet</item>
+        <item>It\'s the followee\'s first tweet</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_groups">Groups</string>
+</resources>
