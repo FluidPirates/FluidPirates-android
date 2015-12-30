@@ -49,6 +49,7 @@ public class LoginActivity extends Activity {
         this.savedInstanceState = savedInstanceState;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         final Button loginButton = (Button) findViewById(R.id.connexion);
         loginButton.setOnClickListener(new OnClickListener() {
 

@@ -31,31 +31,32 @@
     <string name="connexion">Se connecter</string>
 
     <string-array name="name_group">
-    <item>UTT\n2500</item>
-    <item>UTC\n3000</item>
-    <item>UTBM\n1000</item>
-</string-array>
+        <item>UTT</item>
+        <item>UTC</item>
+        <item>UTBM</item>
+    </string-array>
 
-    <integer-array name="nb_members">
+    <string-array name="nb_members">
         <item>2500</item>
         <item>3000</item>
         <item>1000</item>
-    </integer-array>
-
-    <string-array name="followers_tweet_list">
-        <item>It\'s the follower\'s fourth tweet</item>
-        <item>It\'s the follower\'s third tweet</item>
-        <item>It\'s the follower\'s second tweet</item>
-        <item>It\'s the follower\'s first tweet</item>
     </string-array>
-    <string-array name="followees_tweet_list">
-        <item>It\'s the followee\'s fourth tweet</item>
-        <item>It\'s the followee\'s third tweet</item>
-        <item>It\'s the followee\'s second tweet</item>
-        <item>It\'s the followee\'s first tweet</item>
+    <string-array name="categories">
+        <item>Basket</item>
+        <item>Football</item>
+        <item>Rugby</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_groups">Groups</string>
+    <string name="title_activity_current_group">CurrentGroup</string>
+    <string-array name="nav_drawer_items">
+        <item>First</item>
+        <item>Second</item>
+        <item>Third</item>
+        <item>Fourth</item>
+        <item>Fifth</item>
+        <item>Sixth</item>
+    </string-array>
 </resources>

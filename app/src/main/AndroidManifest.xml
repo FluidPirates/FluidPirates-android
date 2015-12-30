@@ -23,16 +23,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Propositions"
-            android:label="@string/title_activity_propositions" />
-        <activity
-            android:name=".Navigation"
-            android:label="@string/title_activity_navigation" />
-        <activity android:name=".Proposition_Label" />
-        <activity android:name=".oneProposition" />
+            android:name=".CurrentGroup"
+            android:label="@string/title_activity_current_group" />
         <activity
             android:name=".Groups"
-            android:label="@string/title_activity_groups"></activity>
+            android:label="@string/title_activity_groups" />
+        <!--
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
     </application>
 
 </manifest>

@@ -21,7 +21,7 @@ android:id="@+id/LL_Fond" android:orientation="vertical">
         android:text="nombre membres"
         android:id="@+id/group_nombre_membres"
         android:padding="15dp"
-        android:textSize="18dp"
+        android:textSize="16dp"
         android:textColor="#000000">
     </TextView>
 
