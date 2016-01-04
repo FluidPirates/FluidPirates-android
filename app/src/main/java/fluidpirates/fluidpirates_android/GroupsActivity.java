@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,7 +31,9 @@ import models.Group;
 import utils.GetJsonArrayAsync;
 
 
-public class GroupsActivity extends Activity {
+
+public class GroupsActivity extends Navigator {
+
     public String[] name_group;
     public String[] nb_members;
 
@@ -85,6 +90,7 @@ public class GroupsActivity extends Activity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(GroupsActivity.this, NewGroupActivity.class);
                 startActivity(intent);
             }
@@ -101,6 +107,24 @@ public class GroupsActivity extends Activity {
             nom = aNom;
             nb_members = anb_membres;
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        new MenuInflater(getApplicationContext()).inflate(R.menu.activity_main_drawer, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.membres:
+                Intent intent = new Intent(this, GroupsActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     class Group_adapter extends BaseAdapter {

@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="UTT">
         <menu>
+
             <item
                 android:id="@+id/scrutins"
-                android:title="  Scrutins" />
+                android:title="    Scrutins" />
             <item
                 android:id="@+id/deleg"
-                android:title="  Délégations" />
+                android:title="    Délégations" />
             <item
                 android:id="@+id/membres"
-                android:title="  Membres" />
+                android:title="    Membres" />
         </menu>
     </item>
     <item
