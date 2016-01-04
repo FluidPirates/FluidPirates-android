@@ -29,11 +29,16 @@ import utils.GetJsonArrayAsync;
 
 
 public class GroupsActivity extends Activity {
-    private static final String GROUPS_URL = "http://fluidpirates.com/api/groups?token=1";
+    private static final String GROUPS_URL = "http://fluidpirates.com/api/groups";
+    private String token = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Intent intent = getIntent();
+        this.token = intent.getExtras().getString("token");
 
         TextView top_bar_text = (TextView) findViewById(R.id.top_bar_text);
         top_bar_text.setText("Groupes");
@@ -42,7 +47,7 @@ public class GroupsActivity extends Activity {
         TextView tv = (TextView) navView.inflateHeaderView(R.layout.nav_header_main).findViewById(R.id.nom_tv);
         tv.setText("Nom session");
 
-        loadFromAPI(GROUPS_URL);
+        loadFromAPI(GROUPS_URL + "?token=" + token);
 
         final Button createButton = (Button) findViewById(R.id.create_group);
         createButton.setOnClickListener(new View.OnClickListener() {

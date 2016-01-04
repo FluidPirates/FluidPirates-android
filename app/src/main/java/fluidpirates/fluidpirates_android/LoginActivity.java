@@ -2,6 +2,7 @@ package fluidpirates.fluidpirates_android;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.support.design.widget.TabLayout;
@@ -34,6 +35,7 @@ public class LoginActivity extends Activity {
     private static final String LOGIN_URL = "http://fluidpirates.com/api/sessions";
     private static final String REGISTER_URL = "http://fluidpirates.com/api/users";
     private static final String TAG = "LoginActivity";
+    private static final String PREFS_NAME = "FluidPiratesPreferences";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +89,15 @@ public class LoginActivity extends Activity {
         protected void onPostExecute(JSONObject json) {
             try {
                 Log.d(TAG, json.toString());
+                String token = json.getString("token");
+                if (token.length() > 0) {
+                    SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
+                    editor.putString("token", json.getString("token"));
+                    editor.commit();
+                    Intent intent = new Intent(LoginActivity.this, GroupsActivity.class);
+                    intent.putExtra("token", token);
+                    startActivity(intent);
+                }
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             } finally {

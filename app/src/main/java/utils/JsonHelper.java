@@ -91,7 +91,12 @@ public class JsonHelper {
             conn.disconnect();
         }
 
-        return new JSONObject();
+        try {
+            return new JSONObject(jsonString);
+        } catch (JSONException e) {
+            Log.e(TAG, Lazy.Ex.getStackTrace(e));
+            return jsonError("JSONException");
+        }
     }
 
     static private String getStringFromInputStream(InputStream is) throws IOException {
@@ -101,6 +106,7 @@ public class JsonHelper {
         while ((line = br.readLine()) != null) {
             sb.append(line);
         }
+        Log.d(TAG, sb.toString());
         return sb.toString();
     }
 
