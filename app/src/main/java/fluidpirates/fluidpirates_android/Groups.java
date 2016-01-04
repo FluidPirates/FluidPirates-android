@@ -71,8 +71,8 @@ public class Groups extends Activity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Groups.this, New_group.class);
-                startActivity(intent);
+                //Intent intent = new Intent(Groups.this, New_group.class);
+                //startActivity(intent);
             }
         });
     }
