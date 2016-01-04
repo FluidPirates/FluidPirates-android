@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CurrentGroupActivity">
-    <include layout = "@layout/fragment_top_bar"/>
+
+    <include layout="@layout/fragment_top_bar" />
 
     <Button
         style="?android:textAppearanceSmall"
@@ -71,6 +72,5 @@
         android:listSelector="@drawable/backnormalgreen"
         android:nestedScrollingEnabled="true"
         android:dividerHeight="10dp"
-        android:divider="#ffffff">
-    </ListView>
+        android:divider="#ffffff"></ListView>
 </RelativeLayout>
