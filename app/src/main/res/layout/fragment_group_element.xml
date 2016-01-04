@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="fill_parent" android:layout_height="fill_parent"
-android:id="@+id/LL_Fond" android:orientation="vertical">
+    android:id="@+id/LL_Fond"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Groupes"
         android:id="@+id/group_nom"
-        android:padding="15dp"
-        android:textSize="18dp"
-        android:textColor="#000000"
-        android:gravity="fill_horizontal">
-    </TextView>
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="nombre membres"
-        android:id="@+id/group_nombre_membres"
+        android:gravity="fill_horizontal"
         android:padding="15dp"
-        android:textSize="16dp"
-        android:textColor="#000000">
-    </TextView>
+        android:text="Groupes"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000"
+        android:textSize="18dp"></TextView>
+
+    <TextView
+        android:id="@+id/group_nombre_membres"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:text="nombre membres"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#000000"
+        android:textSize="16dp"></TextView>
 
 </LinearLayout>
