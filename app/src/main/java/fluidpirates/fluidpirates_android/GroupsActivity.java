@@ -1,4 +1,4 @@
-﻿package fluidpirates.fluidpirates_android;
+package fluidpirates.fluidpirates_android;
 
 import android.app.Activity;
 import android.content.Context;

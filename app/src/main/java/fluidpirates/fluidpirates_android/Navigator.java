@@ -53,7 +53,7 @@ public class Navigator  extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.membres) {
-            Intent intent = new Intent(this, Groups.class);
+            Intent intent = new Intent(this, MembersActivity.class);
             startActivity(intent);
             return true;
         }
@@ -68,7 +68,7 @@ public class Navigator  extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.membres) {
-            Intent intent = new Intent(this, Groups.class);
+            Intent intent = new Intent(this, MembersActivity.class);
             startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
