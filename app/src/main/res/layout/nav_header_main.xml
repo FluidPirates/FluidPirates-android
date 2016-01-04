@@ -13,11 +13,13 @@
 
 
     <TextView
+        android:id="@+id/nom_tv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Profil"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:gravity="center"
+        android:textSize="19dp" />
 
 
 

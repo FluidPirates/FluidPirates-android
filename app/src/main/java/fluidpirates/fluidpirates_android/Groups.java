@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,6 +38,9 @@ public class Groups extends Activity {
         this.listViewGestion();
         TextView top_bar_text = (TextView) findViewById(R.id.top_bar_text);
         top_bar_text.setText("Groupes");
+        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
+        TextView tv = (TextView) navView.inflateHeaderView(R.layout.nav_header_main).findViewById(R.id.nom_tv);
+        tv.setText("Nom session");
     }
 
     protected void listViewGestion() {
@@ -59,6 +64,14 @@ public class Groups extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(Groups.this, CurrentGroup.class);
                 intent.putExtra("group", listGroup.get(position).nom);
+                startActivity(intent);
+            }
+        });
+        final Button createButton = (Button) findViewById(R.id.create_group);
+        createButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Groups.this, New_group.class);
                 startActivity(intent);
             }
         });
