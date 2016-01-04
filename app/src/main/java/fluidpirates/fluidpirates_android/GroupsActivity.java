@@ -34,7 +34,7 @@ public class GroupsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_groups);
         TextView top_bar_text = (TextView) findViewById(R.id.top_bar_text);
         top_bar_text.setText("Groupes");
 
