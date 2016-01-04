@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
 import models.Params;
@@ -40,17 +41,45 @@ public class JsonHelper {
         return getJsonObjectFromUrl(url);
     }
 
-    public static JSONObject postJsonObjectFromUrl(String url, Params params) throws IOException {
-        URL urlObject = new URL(url);
+    public static JSONObject postJsonObjectFromUrl(String url, Params params) {
+        URL urlObject = null;
+        try {
+            urlObject = new URL(url);
+        } catch (MalformedURLException e) {
+            Log.e(TAG, Lazy.Ex.getStackTrace(e));
+            return jsonError("MalformedURLException");
+        }
 
-        HttpURLConnection conn = (HttpURLConnection) urlObject.openConnection();
+        HttpURLConnection conn = null;
+        try {
+            conn = (HttpURLConnection) urlObject.openConnection();
+        } catch (IOException e) {
+            Log.e(TAG, Lazy.Ex.getStackTrace(e));
+            return jsonError("IOException can't open connection");
+        }
         conn.setDoOutput(true);
-        conn.setRequestMethod("POST");
-        PrintWriter out = new PrintWriter(conn.getOutputStream());
+        try {
+            conn.setRequestMethod("POST");
+        } catch (ProtocolException e) {
+            Log.e(TAG, Lazy.Ex.getStackTrace(e));
+            return jsonError("ProtocolException");
+        }
+        PrintWriter out = null;
+        try {
+            out = new PrintWriter(conn.getOutputStream());
+        } catch (IOException e) {
+            Log.e(TAG, Lazy.Ex.getStackTrace(e));
+            return jsonError("IOException can't get output stream");
+        }
         out.print(params.toUrlParams());
         out.close();
 
-        int responseCode = conn.getResponseCode();
+        try {
+            int responseCode = conn.getResponseCode();
+        } catch (IOException e) {
+            Log.e(TAG, Lazy.Ex.getStackTrace(e));
+            return jsonError("IOException can't get response code");
+        }
 
         String jsonString = "";
 
@@ -88,5 +117,15 @@ public class JsonHelper {
         }
 
         return jsonString;
+    }
+
+    private static JSONObject jsonError(String message) {
+        JSONObject json = new JSONObject();
+        try {
+            json.put("message", message);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 }

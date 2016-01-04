@@ -4,6 +4,8 @@ package fluidpirates.fluidpirates_android;
 import android.content.Context;
 import android.os.Bundle;
 
+import android.support.design.widget.TabLayout;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -31,6 +33,7 @@ import utils.PostJsonObjectAsync;
 public class LoginActivity extends Activity {
     private static final String LOGIN_URL = "http://fluidpirates.com/api/sessions";
     private static final String REGISTER_URL = "http://fluidpirates.com/api/users";
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +86,7 @@ public class LoginActivity extends Activity {
         @Override
         protected void onPostExecute(JSONObject json) {
             try {
-                Toast.makeText(context, json.toString(), Toast.LENGTH_LONG).show();
+                Log.d(TAG, json.toString());
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
             } finally {
