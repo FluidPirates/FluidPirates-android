@@ -1,4 +1,4 @@
-﻿package fluidpirates.fluidpirates_android;
+package fluidpirates.fluidpirates_android;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -31,10 +28,8 @@ import models.Group;
 import utils.GetJsonArrayAsync;
 
 
-public class GroupsActivity extends Navigator {
-
-    public String[] name_group;
-    public String[] nb_members;
+public class GroupsActivity extends Activity {
+    private static final String GROUPS_URL = "http://fluidpirates.com/api/groups?token=1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,98 +48,15 @@ public class GroupsActivity extends Navigator {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(GroupsActivity.this, NewGroupActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-    class Group_class {
-
-        public String nom;
-        public String nb_members;
-
-        public Group_class(String aNom, String anb_membres) {
-            nom = aNom;
-            nb_members = anb_membres;
-        }
+    private void loadFromAPI(String url) {
+        (new FetchGroupsIndex(this)).execute(url);
     }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        new MenuInflater(getApplicationContext()).inflate(R.menu.activity_main_drawer, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.membres:
-                Intent intent = new Intent(this, GroupsActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
-
-    class Group_adapter extends BaseAdapter {
-
-        // Une liste de personnes
-        private List<Group_class> mListG;
-
-        //Le contexte dans lequel est présent notre adapter
-        private Context mContext;
-
-        //Un mécanisme pour gérer l'affichage graphique depuis un layout XML
-        private LayoutInflater mInflater;
-
-        public Group_adapter(Context context, List<Group_class> aListG) {
-            mContext = context;
-            mListG = aListG;
-            mInflater = LayoutInflater.from(mContext);
-        }
-
-        public int getCount() {
-            return mListG.size();
-        }
-
-        public Object getItem(int position) {
-            return mListG.get(position);
-        }
-
-        public long getItemId(int position) {
-            return position;
-        }
-
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LinearLayout layoutItem;
-
-            //(1) : Réutilisation des layouts
-            if (convertView == null) {
-                //Initialisation de notre item à partir du  layout XML "personne_layout.xml"
-                layoutItem = (LinearLayout) mInflater.inflate(R.layout.fragment_group_element, parent, false);
-
-            } else {
-                layoutItem = (LinearLayout) convertView;
-            }
-
-            //(2) : Récupération des TextView de notre layout
-            TextView tv_Nom = (TextView) layoutItem.findViewById(R.id.group_nom);
-            TextView tv_members = (TextView) layoutItem.findViewById(R.id.group_nombre_membres);
-
-
-            //(3) : Renseignement des valeurs
-            tv_Nom.setText(mListG.get(position).nom);
-            tv_members.setText(mListG.get(position).nb_members);
-
-            //On retourne l'item créé.
-            return layoutItem;
-        }
-	   private void loadFromAPI(String url) {
-        (new FetchGroupsIndex(this)).execute(url);    }
 
     private class FetchGroupsIndex extends GetJsonArrayAsync {
         public FetchGroupsIndex(Context context) {
