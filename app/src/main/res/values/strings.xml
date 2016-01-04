@@ -30,6 +30,7 @@
     <string name="title_activity_menu">Menu</string>
     <string name="connexion">Se connecter</string>
 
+
     <string-array name="name_group">
         <item>UTT</item>
         <item>UTC</item>
@@ -59,4 +60,5 @@
         <item>Fifth</item>
         <item>Sixth</item>
     </string-array>
+    <string name="title_activity_new_group">New_group</string>
 </resources>

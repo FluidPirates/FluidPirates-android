@@ -24,7 +24,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/imageView1"
-        android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
         android:src="@drawable/menu"
         android:layout_marginLeft="5dp"
