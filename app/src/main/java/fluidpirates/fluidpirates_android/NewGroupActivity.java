@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class New_group extends Activity {
+public class NewGroupActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class New_group extends Activity {
         create_group.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(New_group.this, Groups.class);
+                Intent intent = new Intent(NewGroupActivity.this, GroupsActivity.class);
                 startActivity(intent);
             }
         });

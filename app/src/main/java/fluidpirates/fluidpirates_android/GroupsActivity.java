@@ -10,22 +10,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import fluidpirates.fluidpirates_android.CurrentGroup;
-import fluidpirates.fluidpirates_android.R;
+import models.Group;
+import utils.GetJsonArrayAsync;
 
 
-public class Groups extends Activity {
+public class GroupsActivity extends Activity {
     public String[] name_group;
     public String[] nb_members;
+
+    private static final String GROUPS_URL = "http://fluidpirates.com/api/groups?token=1";
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -41,6 +49,12 @@ public class Groups extends Activity {
         NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
         TextView tv = (TextView) navView.inflateHeaderView(R.layout.nav_header_main).findViewById(R.id.nom_tv);
         tv.setText("Nom session");
+
+        loadFromAPI(GROUPS_URL);
+    }
+
+    private void loadFromAPI(String url) {
+        (new FetchGroupsIndex(this)).execute(url);
     }
 
     protected void listViewGestion() {
@@ -62,7 +76,7 @@ public class Groups extends Activity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(Groups.this, CurrentGroup.class);
+                Intent intent = new Intent(GroupsActivity.this, CurrentGroupActivity.class);
                 intent.putExtra("group", listGroup.get(position).nom);
                 startActivity(intent);
             }
@@ -71,7 +85,7 @@ public class Groups extends Activity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Groups.this, New_group.class);
+                Intent intent = new Intent(GroupsActivity.this, NewGroupActivity.class);
                 startActivity(intent);
             }
         });
@@ -143,7 +157,78 @@ public class Groups extends Activity {
             //On retourne l'item créé.
             return layoutItem;
         }
+    }
 
+    private class FetchGroupsIndex extends GetJsonArrayAsync {
+        public FetchGroupsIndex(Context context) {
+            super(context);
+        }
 
+        @Override
+        protected void onPostExecute(JSONArray json) {
+            try {
+                JSONObject jsonObject = new JSONObject();
+                int length = json.length();
+                final ArrayList<Group> objects = new ArrayList<Group>(length);
+
+                for (int i = 0; i < length; i++) {
+                    jsonObject = json.getJSONObject(i);
+                    objects.add(new Group(
+                            jsonObject.getLong("id"),
+                            jsonObject.getString("name"),
+                            jsonObject.getString("description"),
+                            jsonObject.getString("domain")));
+                }
+
+                ListView listView = (ListView) findViewById (R.id.listGroups);
+                if (listView != null) {
+                    listView.setAdapter(new GroupAdapter(getApplicationContext(), R.layout.group_list_item, objects));
+                }
+            } catch (Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            } finally {
+                super.onPostExecute(json);
+            }
+        }
+    }
+
+    private class GroupAdapter extends ArrayAdapter<Group> implements View.OnClickListener {
+        private ArrayList<Group> items;
+        private int layoutResourceId;
+
+        public GroupAdapter(Context context, int layoutResourceId, ArrayList<Group> items) {
+            super(context, layoutResourceId, items);
+            this.layoutResourceId = layoutResourceId;
+            this.items = items;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View view = convertView;
+            if (view == null) {
+                LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                view = (LinearLayout) layoutInflater.inflate(layoutResourceId, null);
+            }
+            Group item = items.get(position);
+            if (item != null) {
+                TextView itemName = (TextView) view.findViewById(R.id.group_item_name);
+                if (itemName != null) {
+                    itemName.setText(item.getName());
+                }
+                TextView itemDescription = (TextView) view.findViewById(R.id.group_item_description);
+                if (itemDescription != null) {
+                    itemDescription.setText(item.getDescription());
+                }
+                view.setTag(item.getId());
+            }
+            return view;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(GroupsActivity.this, CurrentGroupActivity.class);
+            intent.putExtra("group_id", view.getTag().toString());
+            startActivity(intent);
+        }
     }
 }

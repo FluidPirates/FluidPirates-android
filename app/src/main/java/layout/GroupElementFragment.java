@@ -13,12 +13,12 @@ import fluidpirates.fluidpirates_android.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Group_element.OnFragmentInteractionListener} interface
+ * {@link GroupElementFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Group_element#newInstance} factory method to
+ * Use the {@link GroupElementFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Group_element extends Fragment {
+public class GroupElementFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +30,7 @@ public class Group_element extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Group_element() {
+    public GroupElementFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +40,11 @@ public class Group_element extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Group_element.
+     * @return A new instance of fragment GroupElementFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Group_element newInstance(String param1, String param2) {
-        Group_element fragment = new Group_element();
+    public static GroupElementFragment newInstance(String param1, String param2) {
+        GroupElementFragment fragment = new GroupElementFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

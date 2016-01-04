@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="fluidpirates.fluidpirates_android.Groups">
+    tools:context=".GroupsActivity">
 
     <include layout = "@layout/fragment_top_bar"/>
     <ListView

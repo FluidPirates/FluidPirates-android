@@ -3,7 +3,6 @@ package fluidpirates.fluidpirates_android;
 
 import android.os.Bundle;
 
-import android.support.design.widget.NavigationView;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -16,7 +15,6 @@ import android.widget.EditText;
 import android.app.Activity;
 
 import android.content.Intent;
-import android.widget.TextView;
 
 /**
  * A login screen that offers login via email/password.
@@ -56,7 +54,7 @@ public class LoginActivity extends Activity {
         loginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, Groups.class);
+                Intent intent = new Intent(LoginActivity.this, GroupsActivity.class);
                 startActivity(intent);
             }
         });

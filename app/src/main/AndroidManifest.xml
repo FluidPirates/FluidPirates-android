@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -23,10 +24,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CurrentGroup"
+            android:name=".CurrentGroupActivity"
             android:label="@string/title_activity_current_group" />
         <activity
-            android:name=".Groups"
+            android:name=".GroupsActivity"
             android:label="@string/title_activity_groups" />
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
@@ -37,7 +38,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".New_group"
+            android:name=".NewGroupActivity"
             android:label="@string/title_activity_new_group"></activity>
     </application>
 
