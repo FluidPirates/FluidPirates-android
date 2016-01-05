@@ -32,7 +32,7 @@ import utils.Lazy;
 import utils.PostJsonObjectAsync;
 
 public class CurrentPollActivity extends Activity {
-
+    private ArrayList<RadioButton> radioButtonArray;
     private String TAG = "CurrentPollActivity";
     private static final String POLL_URL = "https://fluidpirates.com/api/groups/:group_id/polls/:poll_id";
     private static final String VOTE_URL = POLL_URL + "/propositions/:proposition_id/choices/:choice_id/votes";
@@ -44,6 +44,8 @@ public class CurrentPollActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_poll);
+
+        radioButtonArray = new ArrayList<RadioButton>();
 
         Intent intent = getIntent();
         this.group_id = intent.getExtras().getString("group_id");
@@ -123,6 +125,7 @@ public class CurrentPollActivity extends Activity {
             super(context, layoutResourceId, items);
             this.layoutResourceId = layoutResourceId;
             this.items = items;
+            radioButtonArray.clear();
         }
 
         @Override
@@ -149,7 +152,6 @@ public class CurrentPollActivity extends Activity {
                 if (listView != null) {
                     listView.setAdapter(new ChoiceAdapter(getApplicationContext(), R.layout.choice_list_item, item.getChoices()));
                 }
-
                 view.setTag(item.getId());
             }
 
@@ -175,7 +177,7 @@ public class CurrentPollActivity extends Activity {
                 view = layoutInflater.inflate(layoutResourceId, parent, false);
             }
 
-            Choice item = items.get(position);
+            final Choice item = items.get(position);
             if (item != null) {
                 TextView itemName = (TextView) view.findViewById(R.id.item_name);
                 if (itemName != null) {
@@ -185,7 +187,9 @@ public class CurrentPollActivity extends Activity {
                 view.setTag(item.getId());
             }
 
-            RadioButton itemVote = (RadioButton) view.findViewById(R.id.item_vote);
+            final RadioButton itemVote = (RadioButton) view.findViewById(R.id.item_vote);
+            radioButtonArray.add(itemVote);
+
 
             itemVote.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -197,7 +201,10 @@ public class CurrentPollActivity extends Activity {
                             ":choice_id", ((ViewGroup) v.getParent()).getTag().toString());
 
                     Log.d(TAG, voteUrl);
-
+                    for (int i = 0; i < radioButtonArray.size(); i++) {
+                        radioButtonArray.get(i).setChecked(false);
+                    }
+                    itemVote.setChecked(true);
                     (new CastVote(CurrentPollActivity.this, new Params())).execute(voteUrl);
                 }
             });
