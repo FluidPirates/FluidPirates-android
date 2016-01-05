@@ -1,17 +1,21 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Proposition {
     private long id;
     private String name;
     private String description;
+    private ArrayList<Choice> choices;
     private Integer maximum_of_votes_per_user;
     private Integer number_of_winning_choices;
 
-    public Proposition(long id, String name, String description, Integer maximum_of_votes_per_user) {
+    public Proposition(long id, String name, String description) {
         this.setId(id);
         this.setName(name);
         this.setDescription(description);
-        this.setMaximum_of_votes_per_user(maximum_of_votes_per_user);
+        this.choices = new ArrayList<Choice>();
     }
 
     public long getId() {
@@ -30,16 +34,20 @@ public class Proposition {
         this.name = name;
     }
 
+    public void addChoice(Choice choice) {
+        choices.add(choice);
+    }
+
+    public ArrayList<Choice> getChoices() {
+        return choices;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setMaximum_of_votes_per_user(Integer maximum_of_votes_per_user) {
-        this.maximum_of_votes_per_user = maximum_of_votes_per_user;
     }
 }
 

@@ -130,7 +130,7 @@ public class JsonHelper {
         try {
             json.put("message", message);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.e(TAG, Lazy.Ex.getStackTrace(e));
         }
         return json;
     }

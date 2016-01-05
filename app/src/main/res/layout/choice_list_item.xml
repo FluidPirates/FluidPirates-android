@@ -10,21 +10,14 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="item_name"
-        android:id="@+id/item_name" />
+        android:id="@+id/item_name"
+        android:textSize="8pt" />
 
-    <TextView
+    <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="item_description"
-        android:id="@+id/item_description"
-        android:layout_margin="5pt" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="simple_list_item"
-        android:id="@+id/textView9" />
+        android:text="Vote"
+        android:id="@+id/item_vote" />
 
 </LinearLayout>

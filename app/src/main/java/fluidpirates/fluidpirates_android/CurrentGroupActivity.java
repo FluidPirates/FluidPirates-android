@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,8 +26,8 @@ import utils.Lazy;
 
 public class CurrentGroupActivity extends Activity {
 
+    private String TAG = "CurrentGroupActivity";
     private static final String GROUP_URL = "http://fluidpirates.com/api/groups/:group_id";
-    private static final String POLLS_URL = "http://fluidpirates.com/api/groups/:group_id/polls";
     private String token = null;
     private String group_id = null;
     private Group group = null;
@@ -40,15 +41,10 @@ public class CurrentGroupActivity extends Activity {
         this.token = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE).getString("token", "");
 
         loadGroupFromAPI(Lazy.Str.urlReplace(GROUP_URL + "?token=" + token, ":group_id", group_id));
-        loadPollsFromAPI(Lazy.Str.urlReplace(POLLS_URL + "?token=" + token, ":group_id", group_id));
     }
 
     private void loadGroupFromAPI(String url) {
         (new FetchGroupShow(this)).execute(url);
-    }
-
-    private void loadPollsFromAPI(String url) {
-        (new FetchPollsIndex(this)).execute(url);
     }
 
     public void setGroup(Group group) {
@@ -71,27 +67,12 @@ public class CurrentGroupActivity extends Activity {
                         json.getString("name"),
                         json.getString("description"),
                         json.getString("domain")));
-            } catch (Exception e) {
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-            } finally {
-                super.onPostExecute(json);
-            }
-        }
-    }
-    private class FetchPollsIndex extends GetJsonArrayAsync {
-        public FetchPollsIndex(Context context) {
-            super(context);
-        }
 
-        @Override
-        protected void onPostExecute(JSONArray json) {
-            try {
-                JSONObject jsonObject;
-                int length = json.length();
-                final ArrayList<Poll> objects = new ArrayList<>(length);
+                JSONArray jsonArray = json.getJSONArray("polls");
+                final ArrayList<Poll> objects = new ArrayList<>();
 
-                for (int i = 0; i < length; i++) {
-                    jsonObject = json.getJSONObject(i);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
                     Poll newObject = new Poll(
                             jsonObject.getInt("id"),
                             jsonObject.getString("name"),
@@ -106,6 +87,7 @@ public class CurrentGroupActivity extends Activity {
                 }
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                Log.e(TAG, Lazy.Ex.getStackTrace(e));
             } finally {
                 super.onPostExecute(json);
             }

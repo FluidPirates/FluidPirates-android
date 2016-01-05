@@ -45,9 +45,5 @@ public class Poll {
     public Boolean getOpen() {
         return open;
     }
-
-    public Boolean getClosed() {
-        return !getOpen();
-    }
 }
 
