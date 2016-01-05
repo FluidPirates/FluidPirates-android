@@ -27,7 +27,7 @@ import utils.Lazy;
 public class CurrentGroupActivity extends Activity {
 
     private String TAG = "CurrentGroupActivity";
-    private static final String GROUP_URL = "http://fluidpirates.com/api/groups/:group_id";
+    private static final String GROUP_URL = "https://fluidpirates.com/api/groups/:group_id";
     private String token = null;
     private String group_id = null;
     private Group group = null;

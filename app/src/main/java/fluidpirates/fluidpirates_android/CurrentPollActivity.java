@@ -33,7 +33,7 @@ import utils.PostJsonObjectAsync;
 public class CurrentPollActivity extends Activity {
 
     private String TAG = "CurrentPollActivity";
-    private static final String POLL_URL = "http://fluidpirates.com/api/groups/:group_id/polls/:poll_id";
+    private static final String POLL_URL = "https://fluidpirates.com/api/groups/:group_id/polls/:poll_id";
     private static final String VOTE_URL = POLL_URL + "/propositions/:proposition_id/choices/:choice_id/votes";
     private String token = null;
     private String group_id = null;

@@ -23,7 +23,7 @@ import utils.GetJsonArrayAsync;
 
 public class GroupsActivity extends Activity {
     private String TAG = "GroupsActivity";
-    private static final String GROUPS_URL = "http://fluidpirates.com/api/groups";
+    private static final String GROUPS_URL = "https://fluidpirates.com/api/groups";
     private String token = null;
 
     @Override
