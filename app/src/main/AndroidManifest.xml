@@ -39,10 +39,11 @@
 
         <activity
             android:name=".NewGroupActivity"
-            android:label="@string/title_activity_new_group"></activity>
+            android:label="@string/title_activity_new_group" />
         <activity
             android:name=".MembersActivity"
-            android:label="@string/title_activity_members"></activity>
+            android:label="@string/title_activity_members" />
+        <activity android:name=".CurrentPollActivity"></activity>
     </application>
 
 </manifest>

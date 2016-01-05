@@ -34,8 +34,7 @@ public class GroupsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groups);
 
-        Intent intent = getIntent();
-        this.token = intent.getExtras().getString("token");
+        this.token = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE).getString("token", "");
 
         TextView top_bar_text = (TextView) findViewById(R.id.top_bar_text);
         top_bar_text.setText("Groupes");
@@ -68,9 +67,9 @@ public class GroupsActivity extends Activity {
         @Override
         protected void onPostExecute(JSONArray json) {
             try {
-                JSONObject jsonObject = new JSONObject();
+                JSONObject jsonObject;
                 int length = json.length();
-                final ArrayList<Group> objects = new ArrayList<Group>(length);
+                final ArrayList<Group> objects = new ArrayList<>(length);
 
                 for (int i = 0; i < length; i++) {
                     jsonObject = json.getJSONObject(i);
@@ -110,7 +109,7 @@ public class GroupsActivity extends Activity {
             View view = convertView;
             if (view == null) {
                 LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = (LinearLayout) layoutInflater.inflate(layoutResourceId, null);
+                view = layoutInflater.inflate(layoutResourceId, null);
             }
             Group item = items.get(position);
             if (item != null) {

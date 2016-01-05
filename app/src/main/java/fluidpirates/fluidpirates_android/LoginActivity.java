@@ -35,7 +35,7 @@ public class LoginActivity extends Activity {
     private static final String LOGIN_URL = "http://fluidpirates.com/api/sessions";
     private static final String REGISTER_URL = "http://fluidpirates.com/api/users";
     private static final String TAG = "LoginActivity";
-    private static final String PREFS_NAME = "FluidPiratesPreferences";
+    public static final String PREFS_NAME = "FluidPiratesPreferences";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +95,6 @@ public class LoginActivity extends Activity {
                     editor.putString("token", json.getString("token"));
                     editor.commit();
                     Intent intent = new Intent(LoginActivity.this, GroupsActivity.class);
-                    intent.putExtra("token", token);
                     startActivity(intent);
                 }
             } catch (Exception e) {
