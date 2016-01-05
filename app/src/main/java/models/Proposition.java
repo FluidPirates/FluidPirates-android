@@ -7,7 +7,7 @@ public class Proposition {
     private long id;
     private String name;
     private String description;
-    private ArrayList choices;
+    private ArrayList<Choice> choices;
 
     public Proposition(long id, String name, String description) {
         this.setId(id);

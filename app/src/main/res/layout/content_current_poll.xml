@@ -15,7 +15,7 @@
         android:layout_marginTop="180dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:id="@+id/list_proposition"
+        android:id="@+id/propositionsList"
         android:layout_alignParentBottom="true"
         android:background="@drawable/backcleargreen"
         android:listSelector="@drawable/backnormalgreen"

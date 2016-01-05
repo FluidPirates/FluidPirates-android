@@ -82,7 +82,6 @@ public class CurrentPollActivity extends Activity {
                         json.getString("name"),
                         json.getString("description"),
                         json.getBoolean("open?")));
-
                 JSONArray jsonArray = json.getJSONArray("propositions");
                 final ArrayList<Proposition> objects = new ArrayList<>();
 
@@ -100,7 +99,10 @@ public class CurrentPollActivity extends Activity {
                                 choiceObject.getString("name")));
                     }
                     objects.add(newObject);
+
                 }
+                Proposition newObject2 = new Proposition(1,"yo","bro");
+                objects.add(newObject2);
 
                 ListView listView = (ListView) findViewById(R.id.propositionsList);
                 if (listView != null) {

@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
+    android:layout_height="180dp"
     android:orientation="vertical"
     android:background="@drawable/standard_button">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="proposition_item_name"
-        android:id="@+id/proposition_item_name"
+        android:id="@+id/poll_name"
         android:layout_marginTop="80dp"
         android:gravity="center" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="proposition_item_description"
-        android:id="@+id/proposition_item_description"
+        android:id="@+id/poll_description"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="open"
+        android:id="@+id/open"
         android:gravity="center" />
 
 </LinearLayout>
