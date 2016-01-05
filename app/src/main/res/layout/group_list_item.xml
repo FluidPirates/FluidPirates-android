@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="5pt">
 
     <TextView
         android:layout_width="wrap_content"
@@ -16,6 +17,30 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="group_item_description"
-        android:id="@+id/group_item_description" />
+        android:id="@+id/group_item_description"
+        android:layout_margin="5pt" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="always">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Membres:"
+            android:id="@+id/textView4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="group_item_users_count"
+            android:id="@+id/group_item_users_count"
+            android:textStyle="bold"
+            android:layout_marginLeft="2pt" />
+    </LinearLayout>
 
 </LinearLayout>

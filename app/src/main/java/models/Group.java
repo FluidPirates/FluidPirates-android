@@ -5,6 +5,7 @@ public class Group {
     private String name;
     private String description;
     private String domain;
+    private int usersCount;
 
     public Group(long id, String name, String description, String domain) {
         this.setId(id);
@@ -43,6 +44,14 @@ public class Group {
 
     public void setDomain(String domain) {
         this.domain = domain;
+    }
+
+    public int getUsersCount() {
+        return usersCount;
+    }
+
+    public void setUsersCount(int usersCount) {
+        this.usersCount = usersCount;
     }
 }
 

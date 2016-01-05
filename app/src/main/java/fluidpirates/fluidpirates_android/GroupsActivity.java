@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import models.Group;
 import utils.GetJsonArrayAsync;
 
 public class GroupsActivity extends Activity {
+    private String TAG = "GroupsActivity";
     private static final String GROUPS_URL = "http://fluidpirates.com/api/groups";
     private String token = null;
 
@@ -72,11 +74,13 @@ public class GroupsActivity extends Activity {
 
                 for (int i = 0; i < length; i++) {
                     jsonObject = json.getJSONObject(i);
-                    objects.add(new Group(
-                            jsonObject.getLong("id"),
+                    Group newGroup = new Group(
+                            jsonObject.getInt("id"),
                             jsonObject.getString("name"),
                             jsonObject.getString("description"),
-                            jsonObject.getString("domain")));
+                            jsonObject.getString("domain"));
+                    newGroup.setUsersCount(jsonObject.getInt("users_count"));
+                    objects.add(newGroup);
                 }
 
                 ListView listView = (ListView) findViewById(R.id.listGroups);
@@ -118,16 +122,29 @@ public class GroupsActivity extends Activity {
                 if (itemDescription != null) {
                     itemDescription.setText(item.getDescription());
                 }
+
+                TextView itemUsersCount = (TextView) view.findViewById(R.id.group_item_users_count);
+                if (itemUsersCount != null) {
+                    itemUsersCount.setText(Integer.toString(item.getUsersCount()));
+                }
+
                 view.setTag(item.getId());
             }
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(GroupsActivity.this, CurrentGroupActivity.class);
+                    intent.putExtra("group_id", v.getTag().toString());
+                    startActivity(intent);
+                }
+            });
+
             return view;
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(GroupsActivity.this, CurrentGroupActivity.class);
-            intent.putExtra("group_id", view.getTag().toString());
-            startActivity(intent);
         }
     }
 }
