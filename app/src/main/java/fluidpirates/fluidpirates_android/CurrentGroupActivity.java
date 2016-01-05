@@ -1,16 +1,13 @@
 package fluidpirates.fluidpirates_android;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
-import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,63 +17,92 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import models.Scrutin;
+import models.Group;
+import models.Poll;
 import utils.GetJsonArrayAsync;
+import utils.GetJsonObjectAsync;
+import utils.Lazy;
 
 public class CurrentGroupActivity extends Activity {
 
-    private static final String GROUPS_URL = "http://fluidpirates.com/api/groups/1/categories/1/polls";
+    private static final String GROUP_URL = "http://fluidpirates.com/api/groups/:group_id";
+    private static final String POLLS_URL = "http://fluidpirates.com/api/groups/:group_id/polls";
     private String token = null;
+    private String group_id = null;
+    private Group group = null;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_group);
 
         Intent intent = getIntent();
-        String nomGroup = intent.getStringExtra("group_id");
-        this.token = intent.getExtras().getString("token");
+        this.group_id = intent.getExtras().getString("group_id");
+        this.token = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE).getString("token", "");
 
-        TextView top_bar_text = (TextView) findViewById(R.id.top_bar_text);
-        top_bar_text.setText(nomGroup);
-        Button button = (Button) findViewById(R.id.ajouter_membres);
-        button.setVisibility(View.VISIBLE);
-        button.setEnabled(false);
-        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
-        TextView tv = (TextView) navView.inflateHeaderView(R.layout.nav_header_main).findViewById(R.id.nom_tv);
-        tv.setText("Nom session");
-
-        loadFromAPI(GROUPS_URL + "?token=" + token);
+        loadGroupFromAPI(Lazy.Str.urlReplace(GROUP_URL + "?token=" + token, ":group_id", group_id));
+        loadPollsFromAPI(Lazy.Str.urlReplace(POLLS_URL + "?token=" + token, ":group_id", group_id));
     }
 
-    private void loadFromAPI(String url) {
-        (new FetchGroupsIndex(this)).execute(url);
+    private void loadGroupFromAPI(String url) {
+        (new FetchGroupShow(this)).execute(url);
     }
 
-    private class FetchGroupsIndex extends GetJsonArrayAsync {
-        public FetchGroupsIndex(Context context) {
+    private void loadPollsFromAPI(String url) {
+        (new FetchPollsIndex(this)).execute(url);
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+
+        ((TextView) findViewById(R.id.group_name)).setText(group.getName());
+        ((TextView) findViewById(R.id.group_description)).setText(group.getDescription());
+    }
+
+    private class FetchGroupShow extends GetJsonObjectAsync {
+        public FetchGroupShow(Context context) {
+            super(context);
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject json) {
+            try {
+                CurrentGroupActivity.this.setGroup(new Group(
+                        json.getInt("id"),
+                        json.getString("name"),
+                        json.getString("description"),
+                        json.getString("domain")));
+            } catch (Exception e) {
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+            } finally {
+                super.onPostExecute(json);
+            }
+        }
+    }
+    private class FetchPollsIndex extends GetJsonArrayAsync {
+        public FetchPollsIndex(Context context) {
             super(context);
         }
 
         @Override
         protected void onPostExecute(JSONArray json) {
             try {
-                JSONObject jsonObject = new JSONObject();
+                JSONObject jsonObject;
                 int length = json.length();
-                final ArrayList<Scrutin> objects = new ArrayList<Scrutin>(length);
+                final ArrayList<Poll> objects = new ArrayList<>(length);
 
                 for (int i = 0; i < length; i++) {
                     jsonObject = json.getJSONObject(i);
-                    Scrutin newScrutin = new Scrutin(
+                    Poll newObject = new Poll(
                             jsonObject.getInt("id"),
                             jsonObject.getString("name"),
                             jsonObject.getString("description"),
-                            jsonObject.getBoolean("open?"),
-                            jsonObject.getBoolean("closed?"));
-                    objects.add(newScrutin);
+                            jsonObject.getBoolean("open?"));
+                    objects.add(newObject);
                 }
-                ListView listView = (ListView) findViewById(R.id.list_propositions);
+
+                ListView listView = (ListView) findViewById(R.id.pollsList);
                 if (listView != null) {
-                    listView.setAdapter(new PropositionAdapter(getApplicationContext(), R.layout.proposition_list_item, objects));
+                    listView.setAdapter(new PollAdapter(getApplicationContext(), R.layout.simple_list_item, objects));
                 }
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -86,11 +112,11 @@ public class CurrentGroupActivity extends Activity {
         }
     }
 
-    private class PropositionAdapter extends ArrayAdapter<Scrutin> implements View.OnClickListener {
-        private ArrayList<Scrutin> items;
+    private class PollAdapter extends ArrayAdapter<Poll> {
+        private ArrayList<Poll> items;
         private int layoutResourceId;
 
-        public PropositionAdapter(Context context, int layoutResourceId, ArrayList<Scrutin> items) {
+        public PollAdapter(Context context, int layoutResourceId, ArrayList<Poll> items) {
             super(context, layoutResourceId, items);
             this.layoutResourceId = layoutResourceId;
             this.items = items;
@@ -101,15 +127,16 @@ public class CurrentGroupActivity extends Activity {
             View view = convertView;
             if (view == null) {
                 LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                view = (LinearLayout) layoutInflater.inflate(layoutResourceId, null);
+                view = layoutInflater.inflate(layoutResourceId, null);
             }
-            Scrutin item = items.get(position);
+            Poll item = items.get(position);
             if (item != null) {
-                TextView itemName = (TextView) view.findViewById(R.id.proposition_item_name);
+                TextView itemName = (TextView) view.findViewById(R.id.item_name);
                 if (itemName != null) {
                     itemName.setText(item.getName());
                 }
-                TextView itemDescription = (TextView) view.findViewById(R.id.proposition_item_description);
+
+                TextView itemDescription = (TextView) view.findViewById(R.id.item_description);
                 if (itemDescription != null) {
                     itemDescription.setText(item.getDescription());
                 }
@@ -120,17 +147,14 @@ public class CurrentGroupActivity extends Activity {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(CurrentGroupActivity.this, CurrentGroupActivity.class);
-                    intent.putExtra("group_id", v.getTag().toString());
+                    Intent intent = new Intent(CurrentGroupActivity.this, CurrentPollActivity.class);
+                    intent.putExtra("group_id", CurrentGroupActivity.this.group_id);
+                    intent.putExtra("poll_id", v.getTag().toString());
                     startActivity(intent);
                 }
             });
 
             return view;
-        }
-
-        @Override
-        public void onClick(View view) {
         }
     }
 }

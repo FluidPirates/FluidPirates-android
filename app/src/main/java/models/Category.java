@@ -1,11 +1,11 @@
 package models;
 
-public class Categorie {
+public class Category {
     private long id;
     private String name;
     private String description;
 
-    public Categorie(long id, String name, String description) {
+    public Category(long id, String name, String description) {
         this.setId(id);
         this.setName(name);
         this.setDescription(description);

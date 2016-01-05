@@ -1,24 +1,24 @@
 package models;
 
 public class Group {
-    private long id;
+    private int id;
     private String name;
     private String description;
     private String domain;
     private int usersCount;
 
-    public Group(long id, String name, String description, String domain) {
+    public Group(int id, String name, String description, String domain) {
         this.setId(id);
         this.setName(name);
         this.setDescription(description);
         this.setDomain(domain);
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

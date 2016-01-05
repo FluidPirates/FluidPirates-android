@@ -1,27 +1,23 @@
 package models;
 
-public class Scrutin {
-    private long id;
+public class Poll {
+    private int id;
     private String name;
     private String description;
     private Boolean open;
-    private Boolean closed;
 
-
-
-    public Scrutin(long id, String name, String description, boolean closed, boolean open) {
+    public Poll(int id, String name, String description, boolean open) {
         this.setId(id);
         this.setName(name);
         this.setDescription(description);
-        this.setClosed(closed);
         this.setOpen(open);
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -46,11 +42,12 @@ public class Scrutin {
         this.open = open;
     }
 
-    public void setClosed(Boolean closed) {
-        this.closed = closed;
-    }
     public Boolean getOpen() {
         return open;
+    }
+
+    public Boolean getClosed() {
+        return !getOpen();
     }
 }
 
