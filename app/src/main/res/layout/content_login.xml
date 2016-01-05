@@ -28,7 +28,8 @@
             android:hint="email"
             android:inputType="text"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:text="admin@example.com" />
 
 
         <EditText
@@ -43,7 +44,8 @@
             android:imeOptions="actionUnspecified"
             android:inputType="textPassword"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:text="admin" />
 
 
         <Button
