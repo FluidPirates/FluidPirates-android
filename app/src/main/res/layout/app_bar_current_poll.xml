@@ -19,6 +19,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_current_group" />
+    <include layout="@layout/content_current_poll" />
 
 </android.support.design.widget.CoordinatorLayout>

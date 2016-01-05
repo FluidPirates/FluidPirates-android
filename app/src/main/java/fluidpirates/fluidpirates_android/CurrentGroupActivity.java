@@ -76,7 +76,7 @@ public class CurrentGroupActivity extends Activity {
                 }
                 ListView listView = (ListView) findViewById(R.id.list_propositions);
                 if (listView != null) {
-                    listView.setAdapter(new PropositionAdapter(getApplicationContext(), R.layout.proposition_list_item, objects));
+                    listView.setAdapter(new PropositionAdapter(getApplicationContext(), R.layout.scrutin_list_item, objects));
                 }
             } catch (Exception e) {
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -120,7 +120,7 @@ public class CurrentGroupActivity extends Activity {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(CurrentGroupActivity.this, CurrentGroupActivity.class);
+                    Intent intent = new Intent(CurrentGroupActivity.this, CurrentPollActivity.class);
                     intent.putExtra("group_id", v.getTag().toString());
                     startActivity(intent);
                 }
