@@ -136,6 +136,7 @@ public class GroupsActivity extends Activity {
                 public void onClick(View v) {
                     Intent intent = new Intent(GroupsActivity.this, CurrentGroupActivity.class);
                     intent.putExtra("group_id", v.getTag().toString());
+                    intent.putExtra("token", token);
                     startActivity(intent);
                 }
             });

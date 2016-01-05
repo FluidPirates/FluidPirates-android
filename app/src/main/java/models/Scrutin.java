@@ -7,7 +7,9 @@ public class Scrutin {
     private Boolean open;
     private Boolean closed;
 
-    public Scrutin(long id, String name, String description, Boolean open, Boolean closed) {
+
+
+    public Scrutin(long id, String name, String description, boolean closed, boolean open) {
         this.setId(id);
         this.setName(name);
         this.setDescription(description);
@@ -46,6 +48,9 @@ public class Scrutin {
 
     public void setClosed(Boolean closed) {
         this.closed = closed;
+    }
+    public Boolean getOpen() {
+        return open;
     }
 }
 
