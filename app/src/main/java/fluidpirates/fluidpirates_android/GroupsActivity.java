@@ -130,14 +130,21 @@ public class GroupsActivity extends Activity {
 
                 view.setTag(item.getId());
             }
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(GroupsActivity.this, CurrentGroupActivity.class);
+                    intent.putExtra("group_id", v.getTag().toString());
+                    startActivity(intent);
+                }
+            });
+
             return view;
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(GroupsActivity.this, CurrentGroupActivity.class);
-            intent.putExtra("group_id", view.getTag().toString());
-            startActivity(intent);
         }
     }
 }
