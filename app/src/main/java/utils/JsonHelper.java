@@ -34,11 +34,11 @@ public class JsonHelper {
     }
 
     public static JSONArray getJsonArrayFromUrl(String url) throws MalformedURLException, JSONException, IOException {
-        return getJsonArrayFromUrl(url);
+        return new JSONArray(getStringFromUrl(url));
     }
 
     public static JSONObject getJsonObjectFromUrl(String url) throws MalformedURLException, JSONException, IOException {
-        return getJsonObjectFromUrl(url);
+        return new JSONObject(getStringFromUrl(url));
     }
 
     public static JSONObject postJsonObjectFromUrl(String url, Params params) {
