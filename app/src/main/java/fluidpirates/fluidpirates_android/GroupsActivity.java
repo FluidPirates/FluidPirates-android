@@ -40,7 +40,7 @@ public class GroupsActivity extends Activity {
 
         Intent intent = getIntent();
         this.token = intent.getExtras().getString("token");
-        
+
         TextView top_bar_text = (TextView) findViewById(R.id.top_bar_text);
         top_bar_text.setText("Groupes");
 
