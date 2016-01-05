@@ -35,12 +35,12 @@ public class CurrentGroupActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_group);
-
         Intent intent = getIntent();
         this.group_id = intent.getExtras().getString("group_id");
         this.token = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE).getString("token", "");
 
         loadGroupFromAPI(Lazy.Str.urlReplace(GROUP_URL + "?token=" + token, ":group_id", group_id));
+        ((TextView) findViewById(R.id.top_bar_text)).setText("Groupes");
     }
 
     private void loadGroupFromAPI(String url) {
@@ -49,8 +49,7 @@ public class CurrentGroupActivity extends Activity {
 
     public void setGroup(Group group) {
         this.group = group;
-
-        ((TextView) findViewById(R.id.group_name)).setText(group.getName());
+        ((TextView) findViewById(R.id.top_bar_text)).setText(group.getName());
         ((TextView) findViewById(R.id.group_description)).setText(group.getDescription());
     }
 

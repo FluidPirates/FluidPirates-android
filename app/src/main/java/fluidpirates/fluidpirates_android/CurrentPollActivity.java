@@ -59,7 +59,7 @@ public class CurrentPollActivity extends Activity {
 
     public void setPoll(Poll poll) {
         this.poll = poll;
-
+        ((TextView) findViewById(R.id.top_bar_text)).setText("Proposition");
         ((TextView) findViewById(R.id.poll_name)).setText(this.poll.getName());
         ((TextView) findViewById(R.id.poll_description)).setText(this.poll.getDescription());
         if (this.poll.getOpen()) {
@@ -101,9 +101,6 @@ public class CurrentPollActivity extends Activity {
                     objects.add(newObject);
 
                 }
-                Proposition newObject2 = new Proposition(1,"yo","bro");
-                objects.add(newObject2);
-
                 ListView listView = (ListView) findViewById(R.id.propositionsList);
                 if (listView != null) {
                     listView.setAdapter(new PropositionAdapter(getApplicationContext(), R.layout.proposition_list_item, objects));

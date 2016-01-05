@@ -6,18 +6,8 @@
     tools:context=".CurrentGroupActivity"
     android:orientation="vertical">
 
-    <include layout="@layout/fragment_top_bar"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/fragment_top_bar" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Groupe"
-        android:id="@+id/textView6"
-        android:layout_marginLeft="5pt"
-        android:layout_marginTop="5pt"
-        android:textSize="12pt" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -25,30 +15,18 @@
         android:layout_height="wrap_content"
         android:weightSum="1">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="group_name"
-                android:id="@+id/group_name"
-                android:paddingBottom="0dp"
-                android:paddingTop="5pt"
-                android:paddingLeft="5pt" />
-
-            <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="group_description"
                 android:id="@+id/group_description"
                 android:paddingLeft="5pt"
-                android:paddingBottom="5pt" />
-        </LinearLayout>
+                android:paddingBottom="5pt"
+                android:gravity="center"
+                android:layout_marginTop="5dp" />
+
 
     </LinearLayout>
 
