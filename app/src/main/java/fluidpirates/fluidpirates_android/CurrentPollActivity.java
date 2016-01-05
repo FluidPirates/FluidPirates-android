@@ -33,7 +33,7 @@ import utils.PostJsonObjectAsync;
 public class CurrentPollActivity extends Activity {
 
     private String TAG = "CurrentPollActivity";
-    private static final String POLL_URL = "http://fluidpirates.com/api/groups/:group_id/polls/:poll_id";
+    private static final String POLL_URL = "https://fluidpirates.com/api/groups/:group_id/polls/:poll_id";
     private static final String VOTE_URL = POLL_URL + "/propositions/:proposition_id/choices/:choice_id/votes";
     private String token = null;
     private String group_id = null;
@@ -59,7 +59,7 @@ public class CurrentPollActivity extends Activity {
 
     public void setPoll(Poll poll) {
         this.poll = poll;
-
+        ((TextView) findViewById(R.id.top_bar_text)).setText("Proposition");
         ((TextView) findViewById(R.id.poll_name)).setText(this.poll.getName());
         ((TextView) findViewById(R.id.poll_description)).setText(this.poll.getDescription());
         if (this.poll.getOpen()) {
@@ -101,9 +101,6 @@ public class CurrentPollActivity extends Activity {
                     objects.add(newObject);
 
                 }
-                Proposition newObject2 = new Proposition(1,"yo","bro");
-                objects.add(newObject2);
-
                 ListView listView = (ListView) findViewById(R.id.propositionsList);
                 if (listView != null) {
                     listView.setAdapter(new PropositionAdapter(getApplicationContext(), R.layout.proposition_list_item, objects));

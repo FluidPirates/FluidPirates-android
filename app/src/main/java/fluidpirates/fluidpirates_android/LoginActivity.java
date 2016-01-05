@@ -33,8 +33,8 @@ import utils.PostJsonObjectAsync;
 
 public class LoginActivity extends Activity {
     // 10.0.2.2 is localhost in the android emulator
-    private static final String LOGIN_URL = "http://fluidpirates.com/api/sessions";
-    private static final String REGISTER_URL = "http://fluidpirates.com/api/users";
+    private static final String LOGIN_URL = "https://fluidpirates.com/api/sessions";
+    private static final String REGISTER_URL = "https://fluidpirates.com/api/users";
     private static final String TAG = "LoginActivity";
     public static final String PREFS_NAME = "FluidPiratesPreferences";
 

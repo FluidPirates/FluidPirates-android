@@ -23,13 +23,15 @@ import utils.GetJsonArrayAsync;
 
 public class GroupsActivity extends Activity {
     private String TAG = "GroupsActivity";
-    private static final String GROUPS_URL = "http://fluidpirates.com/api/groups";
+    private static final String GROUPS_URL = "https://fluidpirates.com/api/groups";
     private String token = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groups);
+
+        ((TextView) findViewById(R.id.top_bar_text)).setText("Groupes");
 
         this.token = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE).getString("token", "");
 
@@ -124,6 +126,7 @@ public class GroupsActivity extends Activity {
                 public void onClick(View v) {
                     Intent intent = new Intent(GroupsActivity.this, CurrentGroupActivity.class);
                     intent.putExtra("group_id", v.getTag().toString());
+                    intent.putExtra("group_nom", v.getTag().toString());
                     startActivity(intent);
                 }
             });
