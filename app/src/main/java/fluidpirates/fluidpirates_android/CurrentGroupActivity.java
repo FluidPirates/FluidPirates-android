@@ -15,7 +15,7 @@ public class CurrentGroupActivity extends Activity {
         setContentView(R.layout.activity_current_group);
 
         Intent intent = getIntent();
-        String nomGroup = intent.getExtras().getString("group_id");
+        String nomGroup = intent.getStringExtra("group_id");
 
         TextView top_bar_text = (TextView) findViewById(R.id.top_bar_text);
         top_bar_text.setText(nomGroup);
