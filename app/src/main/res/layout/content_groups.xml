@@ -20,7 +20,10 @@
         android:listSelector="@drawable/backnormalgreen"
         android:nestedScrollingEnabled="true"
         android:dividerHeight="10dp"
-        android:divider="#ffffff"></ListView>
+        android:divider="#ffffff"
+        android:fastScrollAlwaysVisible="false"
+        android:fastScrollEnabled="false"
+        android:longClickable="false"></ListView>
 
     <Button
         android:id="@+id/create_group"
