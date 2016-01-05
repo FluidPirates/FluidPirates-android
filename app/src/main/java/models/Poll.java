@@ -1,21 +1,23 @@
 package models;
 
-public class Categorie {
-    private long id;
+public class Poll {
+    private int id;
     private String name;
     private String description;
+    private Boolean open;
 
-    public Categorie(long id, String name, String description) {
+    public Poll(int id, String name, String description, boolean open) {
         this.setId(id);
         this.setName(name);
         this.setDescription(description);
+        this.setOpen(open);
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -33,6 +35,15 @@ public class Categorie {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+
+    public void setOpen(Boolean open) {
+        this.open = open;
+    }
+
+    public Boolean getOpen() {
+        return open;
     }
 }
 

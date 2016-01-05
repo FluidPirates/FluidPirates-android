@@ -4,14 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,21 +33,13 @@ public class GroupsActivity extends Activity {
 
         this.token = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE).getString("token", "");
 
-        TextView top_bar_text = (TextView) findViewById(R.id.top_bar_text);
-        top_bar_text.setText("Groupes");
-
-        NavigationView navView = (NavigationView) findViewById(R.id.nav_view);
-        TextView tv = (TextView) navView.inflateHeaderView(R.layout.nav_header_main).findViewById(R.id.nom_tv);
-        tv.setText("Nom session");
-
         loadFromAPI(GROUPS_URL + "?token=" + token);
 
         final Button createButton = (Button) findViewById(R.id.create_group);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GroupsActivity.this, NewGroupActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(GroupsActivity.this, NewGroupActivity.class));
             }
         });
     }
@@ -135,7 +124,6 @@ public class GroupsActivity extends Activity {
                 public void onClick(View v) {
                     Intent intent = new Intent(GroupsActivity.this, CurrentGroupActivity.class);
                     intent.putExtra("group_id", v.getTag().toString());
-                    intent.putExtra("token", token);
                     startActivity(intent);
                 }
             });

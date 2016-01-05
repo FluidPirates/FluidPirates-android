@@ -1,76 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CurrentGroupActivity">
+    tools:context=".CurrentGroupActivity"
+    android:orientation="vertical">
 
-    <include layout="@layout/fragment_top_bar" />
+    <include layout="@layout/fragment_top_bar"
+        android:layout_height="wrap_content" />
 
-    <Button
-        style="?android:textAppearanceSmall"
-        android:id="@+id/ajout_proposition"
-        android:layout_width="170dp"
-        android:layout_height="40dp"
-        android:textAllCaps="false"
-        android:background="@drawable/standard_button"
-        android:text="Ajouter une proposition"
-        android:textSize="14dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp" />
-
-    <Button
-        android:id="@+id/anciens_scrutins"
-        style="?android:textAppearanceSmall"
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:textAllCaps="false"
-        android:background="@drawable/standard_button"
-        android:text="Voir les anciens scrutins"
-        android:textSize="12dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Groupe"
+        android:id="@+id/textView6"
+        android:layout_marginLeft="5pt"
+        android:layout_marginTop="5pt"
+        android:textSize="12pt" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
-    <Button
-        style="?android:textAppearanceSmall"
-        android:id="@+id/ajouter_membres"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:textAllCaps="false"
-        android:background="@drawable/standard_button"
-        android:textSize="12dp"
-        android:text="  Ajouter des membres   "
-        android:layout_alignTop="@+id/anciens_scrutins"
-        android:layout_alignRight="@+id/list_propositions"
-        android:layout_alignEnd="@+id/list_propositions" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="group_name"
+                android:id="@+id/group_name"
+                android:paddingBottom="0dp"
+                android:paddingTop="5pt"
+                android:paddingLeft="5pt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="group_description"
+                android:id="@+id/group_description"
+                android:paddingLeft="5pt"
+                android:paddingBottom="5pt" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:weightSum="1"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/anciens_scrutins"
+            style="?android:textAppearanceSmall"
+            android:layout_width="97dp"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:background="@drawable/standard_button"
+            android:text="Voir les anciens scrutins"
+            android:textSize="12dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="false"
+            android:layout_toLeftOf="@+id/ajout_proposition"
+            android:layout_toStartOf="@+id/ajout_proposition"
+            android:layout_above="@+id/categorie_selector"
+            android:layout_margin="5pt"
+            android:layout_gravity="center_vertical|right"
+            android:enabled="true" />
+
+        <Button
+            style="?android:textAppearanceSmall"
+            android:id="@+id/ajout_proposition"
+            android:layout_width="93dp"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:background="@drawable/standard_button"
+            android:text="Ajouter une proposition"
+            android:textSize="14dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5pt"
+            android:layout_gravity="center_vertical"
+            android:enabled="true" />
+
+        <Button
+            style="?android:textAppearanceSmall"
+            android:id="@+id/ajouter_membres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:background="@drawable/standard_button"
+            android:textSize="12dp"
+            android:text="  Ajouter des membres   "
+            android:layout_alignTop="@+id/anciens_scrutins"
+            android:layout_alignRight="@+id/pollsList"
+            android:layout_alignEnd="@+id/pollsList"
+            android:layout_margin="5pt"
+            android:layout_gravity="center_vertical"
+            android:enabled="false" />
+    </LinearLayout>
+
 
     <Spinner
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/categorie_selector"
         android:entries="@array/categories"
-        android:gravity="center"
-        android:paddingTop="20dp"
         android:longClickable="false"
         android:layout_below="@+id/ajout_proposition"
         android:layout_centerHorizontal="true"
-        android:spinnerMode="dropdown" />
+        android:spinnerMode="dropdown"
+        android:gravity="end"
+        android:layout_gravity="center_horizontal" />
 
     <ListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="220dp"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/list_propositions"
+        android:id="@+id/pollsList"
         android:layout_alignParentBottom="true"
         android:background="@drawable/backcleargreen"
         android:listSelector="@drawable/backnormalgreen"
         android:nestedScrollingEnabled="true"
         android:dividerHeight="10dp"
         android:divider="#ffffff"></ListView>
-</RelativeLayout>
+</LinearLayout>
