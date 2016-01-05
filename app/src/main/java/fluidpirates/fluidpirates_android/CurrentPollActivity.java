@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -184,7 +185,7 @@ public class CurrentPollActivity extends Activity {
                 view.setTag(item.getId());
             }
 
-            Button itemVote = (Button) view.findViewById(R.id.item_vote);
+            RadioButton itemVote = (RadioButton) view.findViewById(R.id.item_vote);
 
             itemVote.setOnClickListener(new View.OnClickListener() {
                 @Override
