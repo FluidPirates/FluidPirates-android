@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class NewGroupActivity extends Activity {
-
+//Create a new group activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -3,15 +3,14 @@ package fluidpirates.fluidpirates_android;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -36,6 +35,7 @@ public class CurrentPollActivity extends Activity {
     private String TAG = "CurrentPollActivity";
     private static final String POLL_URL = "https://fluidpirates.com/api/groups/:group_id/polls/:poll_id";
     private static final String VOTE_URL = POLL_URL + "/propositions/:proposition_id/choices/:choice_id/votes";
+    //using of the https url to access to the api.
     private String token = null;
     private String group_id = null;
     private String poll_id = null;
@@ -44,7 +44,7 @@ public class CurrentPollActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_poll);
-
+        //radiobutton array for uncheck all the others answers when one is checked (see choiceAdapter)
         radioButtonArray = new ArrayList<RadioButton>();
 
         Intent intent = getIntent();
@@ -80,6 +80,7 @@ public class CurrentPollActivity extends Activity {
         @Override
         protected void onPostExecute(JSONObject json) {
             try {
+                //catch the informations from the server
                 CurrentPollActivity.this.setPoll(new Poll(
                         json.getInt("id"),
                         json.getString("name"),
@@ -116,7 +117,7 @@ public class CurrentPollActivity extends Activity {
             }
         }
     }
-
+    //Special adaptater for the propositions
     private class PropositionAdapter extends ArrayAdapter<Proposition> {
         private ArrayList<Proposition> items;
         private int layoutResourceId;
@@ -158,7 +159,7 @@ public class CurrentPollActivity extends Activity {
             return view;
         }
     }
-
+    //Special adapter for the choices
     private class ChoiceAdapter extends ArrayAdapter<Choice> {
         private ArrayList<Choice> items;
         private int layoutResourceId;
@@ -190,7 +191,7 @@ public class CurrentPollActivity extends Activity {
             final RadioButton itemVote = (RadioButton) view.findViewById(R.id.item_vote);
             radioButtonArray.add(itemVote);
 
-
+            //CATCH DATA FROM SERVER
             itemVote.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

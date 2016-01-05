@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 import models.Group;
 import models.Poll;
-import utils.GetJsonArrayAsync;
 import utils.GetJsonObjectAsync;
 import utils.Lazy;
 
@@ -28,6 +27,7 @@ public class CurrentGroupActivity extends Activity {
 
     private String TAG = "CurrentGroupActivity";
     private static final String GROUP_URL = "https://fluidpirates.com/api/groups/:group_id";
+    //using of the https url to access to the api.
     private String token = null;
     private String group_id = null;
     private Group group = null;
@@ -35,6 +35,7 @@ public class CurrentGroupActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_group);
+        //get data from the precedent activity
         Intent intent = getIntent();
         this.group_id = intent.getExtras().getString("group_id");
         this.token = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE).getString("token", "");
@@ -49,6 +50,7 @@ public class CurrentGroupActivity extends Activity {
 
     public void setGroup(Group group) {
         this.group = group;
+        //set textviews
         ((TextView) findViewById(R.id.top_bar_text)).setText(group.getName());
         ((TextView) findViewById(R.id.group_description)).setText(group.getDescription());
     }
@@ -95,6 +97,7 @@ public class CurrentGroupActivity extends Activity {
     }
 
     private class PollAdapter extends ArrayAdapter<Poll> {
+        //special adapters for polls
         private ArrayList<Poll> items;
         private int layoutResourceId;
 

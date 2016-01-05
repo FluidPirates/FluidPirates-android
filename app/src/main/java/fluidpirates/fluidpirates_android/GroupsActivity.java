@@ -22,8 +22,10 @@ import models.Group;
 import utils.GetJsonArrayAsync;
 
 public class GroupsActivity extends Activity {
+    //Show the group activity : second page after the login one.
     private String TAG = "GroupsActivity";
     private static final String GROUPS_URL = "https://fluidpirates.com/api/groups";
+    //using of the https url to access to the api.
     private String token = null;
 
     @Override
@@ -43,7 +45,7 @@ public class GroupsActivity extends Activity {
             public void onClick(View v) {
                 startActivity(new Intent(GroupsActivity.this, NewGroupActivity.class));
             }
-        });
+        }); //Change activity from the button create_group
     }
 
     private void loadFromAPI(String url) {
@@ -54,7 +56,7 @@ public class GroupsActivity extends Activity {
         public FetchGroupsIndex(Context context) {
             super(context);
         }
-
+        //Using of the library for catch data from the server
         @Override
         protected void onPostExecute(JSONArray json) {
             try {
@@ -86,6 +88,7 @@ public class GroupsActivity extends Activity {
     }
 
     private class GroupAdapter extends ArrayAdapter<Group> implements View.OnClickListener {
+        //Using of a personal adapter for the group to put in a good order all the data.
         private ArrayList<Group> items;
         private int layoutResourceId;
 
@@ -104,6 +107,7 @@ public class GroupsActivity extends Activity {
             }
             Group item = items.get(position);
             if (item != null) {
+                //EDITION OF THE TEXTVIEW
                 TextView itemName = (TextView) view.findViewById(R.id.group_item_name);
                 if (itemName != null) {
                     itemName.setText(item.getName());

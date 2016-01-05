@@ -5,12 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import android.support.design.widget.TabLayout;
+
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import android.widget.AutoCompleteTextView;
+
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -18,17 +18,12 @@ import android.widget.EditText;
 import android.app.Activity;
 
 import android.content.Intent;
-import android.widget.ListView;
+
 import android.widget.Toast;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-import models.Group;
 import models.Params;
-import utils.GetJsonArrayAsync;
 import utils.PostJsonObjectAsync;
 
 public class LoginActivity extends Activity {
@@ -43,7 +38,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button loginButton = (Button) findViewById(R.id.login_button);
+        Button loginButton = (Button) findViewById(R.id.login_button); //waiting clic on loginButton
         loginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +46,7 @@ public class LoginActivity extends Activity {
             }
         });
 
-        Button registerButton = (Button) findViewById(R.id.login_register_button);
+        Button registerButton = (Button) findViewById(R.id.login_register_button); //waiting clic on RegisterButton
         registerButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +64,7 @@ public class LoginActivity extends Activity {
         Params params = new Params();
         params.put("session[email]", ((EditText) findViewById(R.id.login_email_field)).getText().toString());
         params.put("session[password]", ((EditText) findViewById(R.id.login_password_field)).getText().toString());
-
+        //Ouverture de session
         (new FetchToken(this, params)).execute(LOGIN_URL);
     }
 
@@ -77,7 +72,7 @@ public class LoginActivity extends Activity {
         Params params = new Params();
         params.put("user[email]", ((EditText) findViewById(R.id.login_email_field)).getText().toString());
         params.put("user[password]", ((EditText) findViewById(R.id.login_password_field)).getText().toString());
-
+        //Création de session
         (new FetchToken(this, params)).execute(REGISTER_URL);
     }
 
@@ -87,7 +82,7 @@ public class LoginActivity extends Activity {
         }
 
         @Override
-        protected void onPostExecute(JSONObject json) {
+        protected void onPostExecute(JSONObject json) { //Utilisation d'une bibliothèque de connexion asynchrone.
             try {
                 Log.d(TAG, json.toString());
                 String token = json.getString("token");
