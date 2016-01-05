@@ -8,10 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -22,16 +19,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import models.Group;
 import utils.GetJsonArrayAsync;
 
-
 public class GroupsActivity extends Activity {
     private static final String GROUPS_URL = "http://fluidpirates.com/api/groups";
     private String token = null;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
